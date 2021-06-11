@@ -1,12 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-//int *ptr1=NULL;
-//int *ptr2=NULL;
-//int *ptr3=NULL;
-//int *ptr4=NULL;
-
-void main(){
 
 int *ptr1 = (int *)malloc(sizeof(int));
 int *ptr2 = (int *)malloc(sizeof(int));
