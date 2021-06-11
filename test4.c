@@ -18,11 +18,11 @@ typedef struct control{
 //Inicializacion de funciones y variables
 t_list *createList();
 t_node *createNode();
+t_node *searchNode(t_list *list);
 void insertNode(t_list *list);
 void deleteNode(t_list *list);
-void
+void printList(t_list *list);
 
-//int *data;
 //----------
 //---MAIN---
 int main(){
@@ -52,6 +52,28 @@ t_list *createList(){
         //La funcion me devuelve la nueva lista
         return newList
 }
+
+//Función para buscar un nodo especifico en la lista
+t_node *searchNode(){
+        printList();
+        t_node *index=(t_node*)malloc(sizeof(t_node));
+        *index = 0;
+        int i=0;
+        while(list->current!=NULL;){
+                list->current=list->head;
+                
+                i++;
+        }
+}
+
+
+
+//---FINAL 
+//------------------------------------------------------
+//FUNCIONES DERIVADAS
+
+
+//Función para insertar un nuevo nodo a la lista
 void insertNode(t_list *list){
         //Switch
         //Desea insertar el nuevo nodo:
@@ -91,7 +113,7 @@ void insertNode(t_list *list){
                         imprimirlista();
                         printf("En cual nodo desea posicionarse?");
                         scanf("%i", &num);
-                        current=buscarnodo();
+                        list->current=buscarnodo();
                         //switch nuevo
                         //caso 3.1: antes del nodo
                         node->prev = list->current->prev;
@@ -114,20 +136,20 @@ void deleteNode(t_list *list){
         //1. El primero 2. El ultimo 3. Otro
         //Caso 1: El ultimo
 
-        list->current=list->tail;
-        list->tail->prev->next = NULL;
-        free(list->tail);
-
-//      list->tail = list->tail->prev;
-
+        list->current=list->tail; //Coloca el puntero current en el último nodo de la lista
+        list->tail=list->tail->prev; //Cambia el puntero tail al nodo anterior (ahora este pasa a ser el ultimo nodo de la lista)
+        list->tail->next=NULL; //Hace que el puntero next del nuevo último nodo apunte a NULL
+        list->current->prev=NULL; //Hace que el puntero previo al nodo que vamos a borrar apunte a NULL
+        free(list->current); //Se libera la memoria del nodo 
         printf("El nodo ha sido eliminado con éxito :D");
         //Caso 2: El primero
-        list->
-
-
-
-
+        list->current=list->head; //Coloca el puntero current en el primer nodo de la lista
+        list->head=list->head->next; //Cambia el puntero head al nodo siguiente (ahora este pasa a ser el primer nodo de la lista)
+        list->head->prev=NULL; //Hace que el puntero prev del nuevo head apunte a NULL
+        list->current->next=NULL; //Hace que el puntero prev del antiguo head apunte a NULL
+        free(list->current); //Se libera la memoria del head antiguo 
         printf("El nodo ha sido eliminado con éxito :D");
+
         //Caso 3: En otro lugar
 
 
