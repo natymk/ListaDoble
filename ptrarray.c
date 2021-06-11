@@ -18,10 +18,9 @@ int *ptr4 = (int *)malloc(sizeof(int));
 *ptr3=70;
 *ptr4=30;
 
-//int *ptrarray[]=NULL;
-//ptrarray[1]=ptr1;
+int *ptrarray[20];
+ptrarray[1]=ptr1;
 
-//printf("array[1]: %d\n", ptrarray[1]);
+printf("array[1]: %d\n",*ptrarray[1]);
 
 }
-
