@@ -25,7 +25,7 @@ void deleteNode(t_list *list);
 void printList(t_list *list);
 int listSize(t_list *list);
 int returnMenu();
-int i; //indice
+int i; //índice
 
 //----------
 //------MAIN-------
@@ -39,26 +39,29 @@ int main(){
 
 //Funcion para crear un nuevo nodo
 t_node *createNode(){
-        t_node* newNode = (t_node*)malloc(sizeof(t_node));
+	t_node* newNode = (t_node*)malloc(sizeof(t_node));
+	printf("Ingrese el dato que contendrá el nuevo nodo:");
+	scanf("%d", &node->data);
         //Inicialicion de punteros del nodo
         newNode->data=NULL;
         newNode->next=NULL;
         newNode->prev=NULL;
         //La funcion me devuelve el nuevo nodo
         return newNode;
-}
+}//------END OF FUNCTION------
 
-//Funcion para crear una lista
+//Función para crear una lista
 t_list *createList(){
         t_list *newList = (t_list *)malloc(sizeof(list));
-//Inicializacion de punteros
+//Inicialización de punteros
         newList->current=NULL;
         newList->head=NULL;
         newList->tail=NULL;
         //La funcion me devuelve la nueva lista
         return newList
-}
-//Funcion para obtener el tamaño de la lista
+}//------END OF FUNCTION------
+
+//Función para obtener el tamaño de la lista
 int listSize(t_list *list){
         i=0;
         if(list->head!=NULL;){
@@ -71,19 +74,17 @@ int listSize(t_list *list){
         return i;
 	}//else{
 		//printf();
-	//}
-}
-//FINAL FUNCION listSize();
+
+}//------END OF FUNCTION------
+
 //Función para volver al menú anterior
 int returnMenu(){
 	int inp2;
 	printf("¿Desea hacer algo más?\n1.Volver al menú.\n2.Salir\n");
         scanf("%i",&inp2);
         return inp2;
-}
+}//------END OF FUNCTION------
 
-
-//--------------------------------------------------
 //Función para buscar un nodo especifico en la lista
 t_node *selectNode(t_list *list){
         i=0;
@@ -92,102 +93,158 @@ t_node *selectNode(t_list *list){
         t_node *index[long];
         list->current=list->head;
         printf("Lista de datos:\n");
-        
-        while(list->current!=NULL){
-                t_node *index[long];
-                index[i]=list->current;
-                printf("Nodo %i: %d\n",i+1,*list->current);
-                list->current=list->head->next;
-                i++;
-        }
-        printf("Ingrese la posición del nodo en el que se desea posicionar:\n");
-        scanf("%i",&select);
-        i=0;
-        while(list->current!=NULL){
-                if(*index[i]>long){
-                        printf("El nodo indicado no existe");
-                        break;
-                        return NULL;
-                }
-                if(*index[i]==select){
-                        print("Nodo seleccionado con éxito");
-                        return index[i];
-                        break;
-                }
-       
-}//---FINAL FUNCION SelectNode();
+        if(list->current!=NULL){
+		while(list->current!=NULL){
+			t_node *index[long];
+			index[i]=list->current;
+			printf("Nodo %i: %d\n",i+1,*list->current);
+			list->current=list->head->next;
+			i++;
+		}//--END OF WHILE 1
+		printf("Ingrese la posición del nodo en el que se desea posicionar:\n");
+		scanf("%i",&select);
+		i=0;
+		while(list->current!=NULL){
+			if(*index[i]>long){
+				printf("El nodo indicado no existe");
+				break;
+				return NULL;
+			}//--END OF WHILE 2
+			if(*index[i]==select){
+				print("Nodo seleccionado con éxito");
+				return index[i];
+				break;
+			}//--END OF IF 2
+		
+	}//--END OF IF 1
+        else{
+		printf("La lista está vacía, no hay nada que imprmir :'(\n")	
+	}
+}//------END OF FUNCTION------
+
+//Función para imprimir la lista actual
+void printList(t_list *list){
+	i=0;
+        list->current=list->head;
+	if(list->current!=NULL){
+		printf("Lista de datos:\n");
+        	while(list->current!=NULL){
+                	printf("Nodo %i:|  %d  |\n",i+1,*list->current);
+                	list->current=list->head->next;
+                	i++;
+		}//--END OF WHILE
+	}//--END OF IF
+	else{
+		printf("La lista está vacía, no hay nada que imprmir :'(\n")
+	}
+
+}//------END OF FUNCTION------
+	
+
 	
 //------------------------------------------------------
 //FUNCIONES DERIVADAS
 
 //Función para insertar un nuevo nodo a la lista
 void insertNode(t_list *list){
-	opt
-        switch()
-        //Desea insertar el nuevo nodo:
-        //1. Al principio de la lista 2. Al final 3. En otro lugar
-        //Caso 1: Al final
-        //Se crea el nuevo nodo
-        t_node *node=createNode();
-        //Se le pide al usuario por medio que ingrese el nuevo dato
-        //mediante consola
-        printf("Ingrese el dato que contendrá el nuevo nodo:");
-        scanf("%d", &node->data);
-        //------Se agrega el nodo a la lista
-        //CONDICIONES
-        //1.Si el head está vacio, quiere decir que la lista está vacía
-        //y nuestro nodo será el el primero o el 'head' de la misma
-         if(list->head == NULL){
-                list->head =node;
-                list->head->next = NULL;
-                list->tail = list->head;
-        }//Si el head NO está vacio, entonces nuestro nodo será el siguiente
-         //elemento de la la lista
-        else{
-                list->tail->next = node;
-                node->next = NULL;
-                node->prev = list->tail;
-                list->tail = node;
-        }
-//       -----
-        //Caso 2: Al inicio
-  else{
-                list->head->prev = node;
-                node->prev = NULL;
-                node->next = list->head;
-                list->head = node;
-        }       //Caso 3: En otro lugar
-                else{
-                        imprimirlista();
-                        printf("En cual nodo desea posicionarse?");
-                        scanf("%i", &num);
-                        list->current=buscarnodo();
-                        //switch nuevo
-                        //caso 3.1: antes del nodo
-                        node->prev = list->current->prev;
-                        node->next = list->current;
-                        list->current->prev->next=node;
-                        list->current->prev=node;
-                        //list->current=node;
-                        //Caso 3.2: despues del nodo
-                        node->prev = list->current;
-                        node->next = list->current->next;
-                        list->current->next->prev = node;
-                        list->current->next = node;
-                        //list->current=node;
-        }
-                }
-	//FINAL FUNCION insertNode();
+	int opt;
+	int op2;
+	int r;
+	t_node *node=createNode();//Se le pide al usuario por medio que ingrese el dato que contendrá el nuevo nodo
+		//mediante consola y se crea un nuevo nodo cuya información contenida será la ingresada
+	if(list->head == NULL){//Si el head está vacio, quiere decir que la lista está vacía
+			//y nuestro nodo será el el primero o el 'head' de la misma
+		list->head =node;
+		list->head->next = NULL;
+		list->tail = list->head;
+	}else{// En caso de que no sea el primer elemento de la lista, se procederá a desplegar un menú que le solicitará
+		//al usuario en que parte de la lista desea colocar su nodo
+        while(1){
+		//r=0;//indicador para la opción 3
+		//Se le pide al usuario por medio que ingrese el dato que contendrá el nuevo nodo
+		//mediante consola
+		printf("En que parte de la lista desea insertar el nuevo nodo:"\n);
+                printf("1. Al inicio \n2. Al final \n3. Despues/Antes de un nodo específico\n4.Salir\n");
+		scanf("%d\n", &opt);
+		switch(opt){
+			case 1://Insertar nodo al inicio de la lista
+				list->head->prev = node;
+				node->prev = NULL;
+				node->next = list->head;
+				list->head = node;
+				break;
+			case 2://Insertar nodo al final de la lista
+				list->tail->next = node;
+				node->next = NULL;
+				node->prev = list->tail;
+				list->tail = node;
+				break;
+			case 3://Insertar nodo en otro lugar de la lista
+				printf("En cual nodo desea posicionarse?\n");
+				list->current=selectNode();
+				printf("Insertar nodo:\n1.Antes del nodo seleccionado\n2.Después del nodo seleccionado\n3.Salir\n");
+				switch(opt2){
+					case 1://caso 3.1: antes del nodo
+						if(list->current==list->head){//Si el nodo seleccionado es el primero,entonces 
+						//en realidad se insertará el nuevo nodo al inicio de la lista, como en
+						//el caso 1
+							list->head->prev = node;
+							node->prev = NULL;
+							node->next = list->head;
+							list->head = node;
+							break;	
+						}//---END OF IF
+						else{
+						node->prev = list->current->prev;
+						node->next = list->current;
+						list->current->prev->next = node;
+						list->current->prev = node;
+						break;
+						}
+					case 2://Caso 3.2: después del nodo
+						if(list->current==list->tail){//Si el nodo seleccionado es el último,entonces 
+						//en realidad se insertará el nuevo nodo al final de la lista, como en
+						//el caso 2
+							list->head->prev = node;
+							node->prev = NULL;
+							node->next = list->head;
+							list->head = node;
+							break;	
+						}//---END OF IF
+						else{
+							node->prev = list->current;
+							node->next = list->current->next;
+							list->current->next->prev = node;
+							list->current->next = node;
+							break;
+						}
+
+					case 3://Caso 3.1: Salir del menú actual
+						break;		
+				}//END SWITCH 2
+				break;
+        	}//END OF SWITCH 1
+		opt2=menureturn();//pregunta al usuario si desea realizar otra accion
+		if else(opt2!=1){// Si la opcion es diferente de uno, se saldrá del programa
+				if(opt2!=2){//Si la opción seleccionada no es 2
+					printf("La opción ingresada no es válida\nSaliendo del programa...");
+				}
+				break;
+		}	
+	}//END OF WHILE
 	
-	//----------------------------------------------------
-	//Función para eliminar un nodo de la lista
+}//------END OF FUNCTION------
+	
+//----------------------------------------------------
+
+//Función para eliminar un nodo de la lista
 void deleteNode(t_list *list){
 	int opt;
 	int r;
 	int opt2;
-        if(head!=NULL){             
+        if(list->head!=NULL){             
 		while(1){
-			r=0;//indicador para la opciòn 3
+			r=0;//indicador para la opción 3
 			printf("Cual nodo desea eliminar:"\n);
                 	printf("1. El último \n2. El primero \n3. Otro\n4.Salir\n");
 			scanf("%d\n", &opt);
@@ -252,6 +309,6 @@ void deleteNode(t_list *list){
         printf("La lista se encuentra vacia :(\n ");
         }
 
-}//----END OF deleteNode();
+}//------END OF FUNCTION------
 
 
