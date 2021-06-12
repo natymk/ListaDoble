@@ -3,7 +3,7 @@
 
 //Estructura del nodo
 typedef struct node{
-        int *data;//Dato contenido en el nodo
+        int data;//Dato contenido en el nodo
         struct node* next;//Puntero  al siguiente nodo de la lista
         struct node* prev;//Puntero al siguiente nodo de la lista
 } t_node;//Nombre para hacer referencia al tipo de dato de esta estructura.
@@ -75,8 +75,9 @@ int listSize(t_list *list){
                 }
         
         return i;
-	}//else{
-		//printf();
+	}else{
+		return -1;
+	}
 
 }//------END OF FUNCTION------
 
@@ -92,15 +93,15 @@ int menureturn(){
 t_node *selectNode(t_list *list){
         i=0;
         int select;
-        int l = listSize(list);
-        int *index[l];
-        list->current=list->head;
+        int l = listSize(list);//Longitud de la lista
+        int *index[l];//Se crea un array de punteros para enumerar los nodos
+        list->current=list->head;//Posiciona el puntero current sobre el head
         printf("Lista de datos:\n");
         if(list->current!=NULL){
 		while(list->current!=NULL){
 			index[i]=list->current->data;
 			printf("Nodo %i: %d\n",i+1,*list->current->data);
-			list->current=list->current->next;
+			list->current=list->current->next;//Ahora current es el nodo siguiente de la lista
 			i++;
 		}//--END OF WHILE 1
 		printf("Ingrese la posición del nodo en el que se desea posicionar:\n");
@@ -108,7 +109,7 @@ t_node *selectNode(t_list *list){
 		i=0;
 		while(list->current!=NULL){
 			list->current=list->head;
-			if(*index[i]>l){
+			if(*index[i]>l){//Si el numero de nodo indicado es más grande que la longitud de la lista 
 				printf("El nodo indicado no existe");
 				break;
 				return NULL;
@@ -122,7 +123,8 @@ t_node *selectNode(t_list *list){
 		}//---END OF WHILE 2
 	}//--END OF IF 1
         else{
-		printf("La lista está vacía, no hay nada que imprmir :( \n" );	
+		printf("La lista está vacía, no hay nada que imprmir :( \n" );
+		return NULL;
 	}
 }//------END OF FUNCTION------
 
