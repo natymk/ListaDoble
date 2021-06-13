@@ -219,14 +219,14 @@ void insertNode(t_list *list){
 				node->prev = NULL;
 				node->next = list->head;
 				list->head = node;
-				printf("El nodo ha sido eliminado con éxito :D\n");
+				printf("El nodo ha sido insertado con éxito :D\n");
 				break;
 			case 2://Insertar nodo al final de la lista
 				list->tail->next = node;
 				node->next = NULL;
 				node->prev = list->tail;
 				list->tail = node;
-				printf("El nodo ha sido eliminado con éxito :D\n");
+				printf("El nodo ha sido insertado con éxito :D\n");
 				break;
 			case 3://Insertar nodo en otro lugar de la lista
 				printf("En cual nodo desea posicionarse?\n");
@@ -248,7 +248,7 @@ void insertNode(t_list *list){
 						list->current->prev->next = node;
 						list->current->prev = node;
 						}//END OF ELSE
-						printf("El nodo ha sido eliminado con éxito :D\n");
+						printf("El nodo ha sido insertado con éxito :D\n");
 						break;
 					case 22://Caso 3.2: después del nodo
 						if(list->current==list->tail){//Si el nodo seleccionado es el último,entonces 
@@ -264,13 +264,14 @@ void insertNode(t_list *list){
 							list->current->next->prev = node;
 							list->current->next = node;			
 						}
-						printf("El nodo ha sido eliminado con éxito :D\n");
+						printf("El nodo ha sido insertado con éxito :D\n");
 						break;
 					case 33://Caso 3.1: Salir del menú actual
 						break;//final caso 3.1		
 				}//END SWITCH 2
 				break;//final caso 3
         	}//END OF SWITCH 1
+		printf("FINAL FUNCION INSERTNODE");
 }//END OF ELSE
 
 }//------END OF FUNCTION------
