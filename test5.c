@@ -30,55 +30,61 @@ int i; //índice
 //---------i
 //------MAIN-------
 int main(){
-	int a=0;
-	t_list *list = createList();
+	int opt;
+	int opt2;
+	t_list *list = createList();//Se crea la lista
 	do{
-	int a=0;//variable en la que se guardará la opcion seleccionada por el usuario
-	printf(" ______________________________________________________________________ \n");
-	printf("|                                                                      |\n");
-	printf("|------------------------ Creador de listas ---------------------------|\n");
-	printf("|______________________________________________________________________|\n");
-	printf("|                                                                      |\n");
-	printf("| 1.        Insertar un nuevo nodo en la lista de datos                |\n");
-	printf("|_________________________________ ____________________________________|\n");
-	printf("|                                 |                                    |\n");
-	printf("| 2. Eliminar nodo de la lista    | 3. Imprimir lista                  |\n");
-	printf("|_________________________________|____________________________________|\n");
-	printf("|                                 |                                    |\n");
-	printf("| 4. Eliminar lista               | 5. Salir                           |\n");
-	printf("|_________________________________|____________________________________|\n");
-	printf("Ingrese una opcion: ");
-	scanf("%i", &a);
-		switch(a){
-			case 1:
-				insertNode(list);
-				break;
-			case 2:
-				deleteNode(list);
-				break;
-			case 3:
-				printList(list);
-				break;
-			case 4:
-				break;
-			case 5:
-			//	exit(-1);
-				break;
-		}//END OF SWITCH
+		//Inicialización opciones de menú
+		opt=0;
+		opt2=0;
+		//Interfaz menú
+		printf(" ______________________________________________________________________ \n");
+		printf("|                                                                      |\n");
+		printf("|------------------------ Creador de listas ---------------------------|\n");
+		printf("|______________________________________________________________________|\n");
+		printf("|                                                                      |\n");
+		printf("| 1.        Insertar un nuevo nodo en la lista de datos                |\n");
+		printf("|_________________________________ ____________________________________|\n");
+		printf("|                                 |                                    |\n");
+		printf("| 2. Eliminar nodo de la lista    | 3. Imprimir lista                  |\n");
+		printf("|_________________________________|____________________________________|\n");
+		printf("|                                 |                                    |\n");
+		printf("| 4. Eliminar lista               | 5. Salir                           |\n");
+		printf("|_________________________________|____________________________________|\n");
+		printf("Ingrese una opcion: ");
+		scanf("%i", &opt);
+			switch(opt){
+				case 1:
+					insertNode(list);
+					break;
+				case 2:
+					deleteNode(list);
+					break;
+				case 3:
+					printList(list);
+					break;
+				case 4:
+					//eak;
+				case 5:
+					printf("Saliendo del programa (...)"\n);
+					break;
+			}//END OF SWITCH
+				if (opt!=5){
+				printf("¿Desea hacer algo más?\n1.Volver al menú principal.\n2.Salir\n");
+					scanf("%i", opt2);
+					if(opt2!=1){
+						if(opt2!=2){
+							printf("Opción inválida"\n);
+						}
+						else{
+							break;
+						}
+					}
+				}
+	//		}//END OF IF
 
-		printf("Final menù principal\n");
-			
-	//	a2=menureturn();//pregunta al usuario si desea realizar otra accion
-		//if(a2!=1){// Si la opcion es diferente de 1(re ingresar al menú), se saldrá del programa
-		//		if(a2!=2){//Si la opción seleccionada no es 2
-		//			printf("La opción ingresada no es válida\nSaliendo del programa...");
-		//		}
-		//		
-		//		printf("Saliendo...");
-		//		break;
-//		}//END OF IF
-        	
-	} while(a!=5);//END OF WHILE
+	} while(opt!=5);//Mientras la opción seleccionada por el usuario no sea 5, seguira entrando al menú
+	//END OF DO WHILE
 }//----END OF MAIN-----
 
 //FUNCIONES PRINCIPALES
@@ -190,28 +196,25 @@ void printList(t_list *list){
 	else{
 		printf("La lista está vacía, no hay nada que imprmir :'(\n");
 	}
-
 }//------END OF FUNCTION------
-	
-
-	
 //------------------------------------------------------
 //FUNCIONES DERIVADAS
 
 //Función para insertar un nuevo nodo a la lista
 void insertNode(t_list *list){
-	int opt;
-	t_node *node=createNode();//Se le pide al usuario por medio que ingrese el dato que contendrá el nuevo nodo
-		//mediante consola y se crea un nuevo nodo cuya información contenida será la ingresada
-	if(list->head == NULL){//Si el head está vacio, quiere decir que la lista está vacía
-			//y nuestro nodo será el el primero o el 'head' de la misma
+	int opt=0;
+	t_node *node=createNode();//Se crea un nuevo nodo y se le pide al usuario que ingrese el dato que contendrá.
+	if(list->head == NULL){//Si el head está vacio quiere decir que la lista está vacía, por lo que el nuevo no
+			       //_do será el primer y único elemento de la lista.
 		list->head =node;
 		list->head->next = NULL;
 		list->tail = list->head;
 		list->tail->next=NULL;
 	}
-	else{// En caso de que no sea el primer elemento de la lista, se le preguntara al usuario donde
-		//desea insertar el nuevo nodo
+	else{// En caso de que la lista ya contenga nodos, se le preguntara al usuario en que parte de la lista de_
+		//sea insertar el nuevo nodo.
+		
+		//Submenú para insertar nodo.
 		printf("En que parte de la lista desea insertar el nuevo nodo:\n");
                 printf("1. Al inicio \n2. Al final \n3. Despues/Antes de un nodo específico\n4. Salir\n");
 		scanf("%i\n", &opt);
@@ -234,44 +237,9 @@ void insertNode(t_list *list){
 			case 3://Insertar nodo en otro lugar de la lista
 				printf("En cual nodo desea posicionarse?\n");
 				list->current=selectNode(list);
+				//Submenú
 				printf("Insertar nodo:\n1.Antes del nodo seleccionado\n2.Después del nodo seleccionado\n3.Salir\n");
-//				scanf("%i",&opt2);
-//				switch(opt2){
-//					case 1://caso 3.1: antes del nodo
-//						if(list->current==list->head){//Si el nodo seleccionado es el primero,entonces 
-//						//en realidad se insertará el nuevo nodo al inicio de la lista, como en el caso 1
-//							list->head->prev = node;
-//							node->prev = NULL;
-//							node->next = list->head;
-//							list->head = node;
-//						}//---END OF IF
-//						else{
-//						node->prev = list->current->prev;
-//						node->next = list->current;
-//						list->current->prev->next = node;
-//						list->current->prev = node;
-//						}//END OF ELSE
-//						printf("El nodo ha sido insertado con éxito :D\n");
-//						break;
-//					case 2://Caso 3.2: después del nodo
-//						if(list->current==list->tail){//Si el nodo seleccionado es el último,entonces 
-//						//en realidad se insertará el nuevo nodo al final de la lista, como en el caso 2
-//							list->head->prev = node;
-//							node->prev = NULL;
-//							node->next = list->head;
-//							list->head = node;
-//						}//---END OF IF
-//						else{
-//							node->prev = list->current;
-//							node->next = list->current->next;
-//							list->current->next->prev = node;
-//							list->current->next = node;			
-//						}
-//						printf("El nodo ha sido insertado con éxito :D\n");
-//						break;
-//					default://Caso 3.1: Salir del menú actual
-//						break;//final caso 3.1		
-//				}//END SWITCH 2
+				//Codigo eliminado----
 				break;//final caso 3
 			default: 
 				printf("Opción inválida\n");
