@@ -30,7 +30,12 @@ int i; //índice
 //---------i
 //------MAIN-------
 int main(){
-
+int a=0;
+	switch(a){
+			
+			printf("---Creador de listas---");
+			printf(                         );
+	}
 t_list* list = createList();
 insertNode(list);
 printList(list);
