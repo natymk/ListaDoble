@@ -30,18 +30,49 @@ int i; //índice
 //---------i
 //------MAIN-------
 int main(){
-int a=0;
-	switch(a){
-			
-			printf("---Creador de listas---");
-			printf(                         );
-	}
-t_list* list = createList();
-insertNode(list);
-printList(list);
+	while(1){
+		int a=0;//variable en la que se guardará la opcion seleccionada por el usuario
+		printf("|______________________________________________________________________|");
+		printf("|                                                                      |");
+		printf("|------------------------ Creador de listas ---------------------------|");
+		printf("|______________________________________________________________________|");
+		printf("|                                 |                                    |");
+		printf("| 1. Crear nueva lista            | 2. Insertar nuevo nodo a la lista  |");
+		printf("|_________________________________|____________________________________|");
+		printf("|                                 |                                    |");
+		printf("| 3. Eliminar nodo de la lista    | 4. Imprimir lista                  |");
+		printf("|_________________________________|____________________________________|");
+		printf("|                                 |                                    |");
+		printf("| 5. Eliminar lista               | 6. Salir                           |");
+		printf("|_________________________________|____________________________________|");
+		scanf("%i", &a);
+		switch(a){
+			case 1:
+				t_list* list = createList();
+				break;
+			case 2:
+				insertNode(list);
+				break;
+			case 3:
+				deleteNode(list);
+				break;
+			case 4:
+				printList(list);
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
+		}//END OF SWITCH
+		opt2=menureturn();//pregunta al usuario si desea realizar otra accion
+		if(opt2!=1){// Si la opcion es diferente de 1(re ingresar al menú), se saldrá del programa
+				if(opt2!=2){//Si la opción seleccionada no es 2
+					printf("La opción ingresada no es válida\nSaliendo del programa...");
+				}
+				break;
+	}//END OF WHILE
         return 0;
-}
-//---END OF MAIN---
+}//---END OF MAIN---
 
 //FUNCIONES PRINCIPALES
 
@@ -90,7 +121,7 @@ int listSize(t_list *list){
 //Función para volver al menú anterior
 int menureturn(){
 	int inp2;
-	printf("¿Desea hacer algo más?\n1.Volver al menú.\n2.Salir\n");
+	printf("¿Desea hacer algo más?\n1.Volver al menú principal.\n2.Salir\n");
         scanf("%i",&inp2);
         return inp2;
 }//------END OF FUNCTION------
@@ -173,7 +204,7 @@ void insertNode(t_list *list){
 	}
 	else{// En caso de que no sea el primer elemento de la lista, se procederá a desplegar un menú que le solicitará
 		//al usuario en que parte de la lista desea colocar su nodo
-        while(1){
+//        while(1){
 		//r=0;//indicador para la opción 3
 		//Se le pidie al usuario por medio que ingrese el dato que contendrá el nuevo nodo
 		//mediante consola
@@ -237,14 +268,14 @@ void insertNode(t_list *list){
 				}//END SWITCH 2
 				break;
         	}//END OF SWITCH 1
-		opt2=menureturn();//pregunta al usuario si desea realizar otra accion
-		if(opt2!=1){// Si la opcion es diferente de uno, se saldrá del programa
-				if(opt2!=2){//Si la opción seleccionada no es 2
-					printf("La opción ingresada no es válida\nSaliendo del programa...");
-				}
-				break;
-		}	
-	}//END OF WHILE
+//		opt2=menureturn();//pregunta al usuario si desea realizar otra accion
+//		if(opt2!=1){// Si la opcion es diferente de uno, se saldrá del programa
+//				if(opt2!=2){//Si la opción seleccionada no es 2
+//					printf("La opción ingresada no es válida\nSaliendo del programa...");
+//				}//END OF IF
+//				break;
+//		}//END OF IF	
+//	}//END OF WHILE
 	
 }//END OF ELSE
 }//------END OF FUNCTION------
@@ -257,7 +288,7 @@ void deleteNode(t_list *list){
 	int r;
 	int opt2;
         if(list->head!=NULL){             
-		while(1){
+//		while(1){
 			r=0;//indicador para la opción 3
 			printf("Cual nodo desea eliminar:\n");
                 	printf("1. El último \n2. El primero \n3. Otro\n4.Salir\n");
@@ -309,14 +340,14 @@ void deleteNode(t_list *list){
 				}
 				
 			}//end while anidado
-			opt2=menureturn();//pregunta al usuario si desea realizar otra accion
-			if(opt2!=1){// Si la opcion es diferente de uno, se saldrá del programa
-				if(opt2!=2){//Si la opción seleccionada no es 2
-					printf("La opción ingresada no es válida\nSaliendo del programa...");
-				}
-				break;
-			}
-		}//End while principal
+//			opt2=menureturn();//pregunta al usuario si desea realizar otra accion
+//			if(opt2!=1){// Si la opcion es diferente de uno, se saldrá del programa
+//				if(opt2!=2){//Si la opción seleccionada no es 2
+//					printf("La opción ingresada no es válida\nSaliendo del programa...");
+//				}
+//				break;
+//			}
+//		}//End while principal
         }//END OF IF(head!=NULL)
         else{
         printf("La lista se encuentra vacia :(\n ");
