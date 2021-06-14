@@ -24,6 +24,7 @@ void insertNode(t_list *list);
 void deleteNode(t_list *list);
 void printList(t_list *list);
 int listSize(t_list *list);
+void deleteList(t_list *list);
 //int i; //índice
 int test;
 
@@ -32,6 +33,7 @@ int test;
 int main(){
 	int opt;
 	int opt2;
+	bis:
 	t_list *list = createList();//Se crea la lista
 //	t_node *noditobonito=NULL;
 	do{
@@ -65,12 +67,13 @@ int main(){
 					printList(list);
 					break;
 				case 4:
-					printf("La probación de nOdO :B\n");
-					test=listSize(list);
-					printf("Head:%i\n",list->head->data);
-					printf("Tail:%i\n",list->tail->data);
-					printf("Size:%i\n",test);
-					break;
+					deleteList(list);
+					printf("¿Desea crear una nueva Lista?\n");
+					printf(" 1. Sí\n 2.No(Salir del programa)\n")
+					scanf("%i", &opt3);
+					if(opt3=1){
+						goto bis;
+					}
 				case 5:
 					printf("Saliendo del programa (...)\n");
 					break;
@@ -134,8 +137,8 @@ int listSize(t_list *list){
         
         return i;
 	}else{
-		printf("Error D:");
-		return -1;
+		printf("La lista está vacía D:");
+		return 0;
 	}
 }//------END OF FUNCTION------
 
@@ -330,6 +333,11 @@ void deleteNode(t_list *list){
 							break;
 						}
 						else{
+							list->current->prev->next=list-current->next; //Coloca el puntero current en el primer nodo de la lista
+							list->current->next->prev=list->head->prev; //Cambia el puntero head al nodo siguiente (ahora este pasa a ser el primer nodo de la lista)
+							list->current->prev=NULL; //Hace que el puntero prev del nuevo head apunte a NULL
+							list->current->next=NULL; //Hace que el puntero prev del antiguo head apunte a NULL
+							free(list->current); //Se libera la memoria del head antiguo
 							printf("El nodo ha sido eliminado con éxito :D\n");
 							break;
 						}
@@ -351,6 +359,32 @@ void deleteNode(t_list *list){
         else{
         printf("La lista se encuentra vacia :(\n ");
         }
+}//------END OF FUNCTION------
+
+void deleteList(l_list *list){
+	if(list->head!=NULL){ //Solo eliminará la lista si no está vacía
+		list->current->list->head;//Posiciona el puntero current en el head de la lista
+		if(list->head->next!=NULL){//Solo se ejecutará si la lista tiene más de un elemento
+			list->current=list->head->next;
+			while(list->current!=NULL){
+				list->current->prev->prev=NULL;
+				list->current->prev->next=NULL;
+				free(list->current->prev)
+				list->current=list->current->next;
+			}//END OF WHILE
+		}//END OF IF 2
+	}//END OF IF 1
+	list->current->next=NULL;
+	list->current->prev=NULL;
+	free(list->current);
+	//Se apuntan a NULL todos los punteros de control de la lista
+	list->head=NULL;
+	list->current=NULL;
+	list->tail=NULL;
+	//Se libera la lista
+	free(list);
+	printf("Lista liberada exitosamente!\n");
+
 }//------END OF FUNCTION------
 
 
