@@ -36,8 +36,7 @@ int main(){
 	t_list *list;
 	int opt3;
 bis:
-	list=createList();//Se crea la lista
-//	t_node *noditobonito=NULL;
+	list=createList();//Se crea la lista;
 	do{
 		//Inicialización opciones de menú
 		opt=0;
@@ -77,13 +76,15 @@ bis:
 					if(opt3==1){
 						goto bis;
 					}
+					break;
+
 				case 5:
 					printf("Saliendo del programa (...)\n");
 					break;
 				default:
 					printf("Opción inválida\n");
 			}//END OF SWITCH
-				if (opt!=5){
+				if (opt!=5 && opt3!=2){
 				printf("¿Desea hacer algo más?\n1.Volver al menú principal.\n2.Salir\n");
 					scanf("%i",&opt2);
 					if(opt2!=1){
@@ -97,10 +98,11 @@ bis:
 				}else{break;}
 			//END OF IF
 
-	} while(opt!=5);//Mientras la opción seleccionada por el usuario no sea 5, seguira entrando al menú
+	} while(opt!=5 && opt2!=2);//Mientras la opción seleccionada por el usuario no sea 5, seguira entrando al menú
 	//END OF DO WHILE
 
 free(list);
+
 }//----END OF MAIN-----
 
 //FUNCIONES PRINCIPALES
@@ -377,15 +379,17 @@ void deleteList(t_list *list){
 		if(list->head->next!=NULL){//Solo se ejecutará si la lista tiene más de un elemento
 			list->current=list->head->next;
 			while(list->current!=NULL){
-				list->current->prev->prev=NULL;
-				list->current->prev->next=NULL;
-				free(list->current->prev);
-				list->current=list->current->next;
+				list->head->next=NULL;
+				list->current->prev=NULL;
+				free(list->head);
+//i				printf("ALL GOOD AS FAR\n");
+				list->head=list->current;
+				list->current=list->head->next;
+//					printf("ALL GOOD AS FAR\n");
 			}//END OF WHILE
+//		printf("Saliendo del while\n");
 		}//END OF IF 2
-	list->current->next=NULL;
-	list->current->prev=NULL;
-	free(list->current);
+	free(list->head);
 	//Se apuntan a NULL todos los punteros de control de la lista
 	list->head=NULL;
 	list->current=NULL;
