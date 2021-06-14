@@ -7,14 +7,13 @@ typedef struct node{
         struct node* next;//Puntero  al siguiente nodo de la lista
         struct node* prev;//Puntero al siguiente nodo de la lista
 } t_node;//Nombre para hacer referencia al tipo de dato de esta estructura.
-
+//--------------------
 //Estructura de control
 typedef struct control{
         t_node* current;//Puntero al nodo actual
         t_node* head;//Puntero al primero nodo
         t_node* tail;//Puntero al ùltimo nodo
 } t_list;//Nombre para hacer referencia al tipo de dato de esta estructura
-
 //----------
 //Inicializacion de funciones y variables
 t_list *createList();
@@ -25,9 +24,6 @@ void deleteNode(t_list *list);
 void printList(t_list *list);
 int listSize(t_list *list);
 void deleteList(t_list *list);
-//int i; //índice
-int test;
-
 //---------i
 //------MAIN-------
 int main(){
@@ -77,14 +73,13 @@ bis:
 						goto bis;
 					}
 					break;
-
 				case 5:
 					printf("Saliendo del programa (...)\n");
 					break;
 				default:
 					printf("Opción inválida\n");
 			}//END OF SWITCH
-				if (opt!=5 && opt3!=2){
+				if (opt!=5 && opt3!=2){//Se ejecuta solo si el usuario no ha solicitado salir del programa
 				printf("¿Desea hacer algo más?\n1.Volver al menú principal.\n2.Salir\n");
 					scanf("%i",&opt2);
 					if(opt2!=1){
@@ -97,11 +92,9 @@ bis:
 					}
 				}else{break;}
 			//END OF IF
-
 	} while(opt!=5 && opt2!=2);//Mientras la opción seleccionada por el usuario no sea 5, seguira entrando al menú
 	//END OF DO WHILE
-
-free(list);
+free(list);//Se libera la memoria reservada para la lista
 
 }//----END OF MAIN-----
 
@@ -189,7 +182,6 @@ t_node *selectNode(t_list *list){
 		printf("Error al seleccionar nodo :(\n");
 	}
 	return r;
-
 }//------END OF FUNCTION------
 
 //Función para imprimir la lista actual
@@ -223,7 +215,6 @@ void insertNode(t_list *list){
 		list->tail = list->head;
 		list->tail->next=NULL;
 		printf("El nodo ha sido insertado con éxito :D\n");
-
 	}	
 	else{// En caso de que la lista ya contenga nodos, se le preguntara al usuario en que parte de la lista de_
 		//sea insertar el nuevo nodo.
@@ -253,7 +244,6 @@ void insertNode(t_list *list){
 				list->current=selectNode(list);
 				//Submenú
 				printf("Insertar nodo:\n1.Antes del nodo seleccionado\n2.Después del nodo seleccionado\n3.Salir\n");
-				//Codigo eliminado----
 						scanf("%i",&opt2);
 				switch(opt2){
 					case 1://caso 3.1: antes del nodo
@@ -291,8 +281,6 @@ void insertNode(t_list *list){
 					default://Caso 3.1: Salir del menú actual
 						break;//final caso 3.1		
 				}//END SWITCH 21
-
-				//Codigo eliminado----
 				break;//final caso 3
 			default: 
 				printf("Opción inválida\n");
@@ -382,12 +370,10 @@ void deleteList(t_list *list){
 				list->head->next=NULL;
 				list->current->prev=NULL;
 				free(list->head);
-//i				printf("ALL GOOD AS FAR\n");
+
 				list->head=list->current;
 				list->current=list->head->next;
-//					printf("ALL GOOD AS FAR\n");
 			}//END OF WHILE
-//		printf("Saliendo del while\n");
 		}//END OF IF 2
 	free(list->head);
 	//Se apuntan a NULL todos los punteros de control de la lista
