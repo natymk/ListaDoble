@@ -25,10 +25,6 @@ void deleteNode(t_list *list);
 void printList(t_list *list);
 int listSize(t_list *list);
 void deleteList(t_list *list);
-//int i; //índice
-int test;
-
-//---------i
 //------MAIN-------
 int main(){
 	int opt;
@@ -252,49 +248,48 @@ void insertNode(t_list *list){
 				break;
 			case 3://Insertar nodo en otro lugar de la lista
 				printf("En cual nodo desea posicionarse?\n");
-				list->current=selectNode(list);
-				//Submenú
-				printf("Insertar nodo:\n1.Antes del nodo seleccionado\n2.Después del nodo seleccionado\n3.Salir\n");
-				//Codigo eliminado----
-						scanf("%i",&opt2);
-				switch(opt2){
-					case 1://caso 3.1: antes del nodo
-						if(list->current==list->head){//Si el nodo seleccionado es el primero,entonces 
-						//en realidad se insertará el nuevo nodo al inicio de la lista, como en el caso 1
-							list->head->prev = node;
-							node->prev = NULL;
-							node->next = list->head;
-							list->head = node;
-						}//---END OF IF
-						else{
-						node->prev = list->current->prev;
-						node->next = list->current;
-						list->current->prev->next = node;
-						list->current->prev = node;
-						}//END OF ELSE
-						printf("El nodo ha sido insertado con éxito :D\n");
-						break;
-					case 2://Caso 3.2: después del nodo
-						if(list->current==list->tail){//Si el nodo seleccionado es el último,entonces 
-						//en realidad se insertará el nuevo nodo al final de la lista, como en el caso 2
-							list->head->prev = node;
-							node->prev = NULL;
-							node->next = list->head;
-							list->head = node;
-						}//---END OF IF
-						else{
-							node->prev = list->current;
-							node->next = list->current->next;
-							list->current->next->prev = node;
-							list->current->next = node;			
-						}
-						printf("El nodo ha sido insertado con éxito :D\n");
-						break;
-					default://Caso 3.1: Salir del menú actual
-						break;//final caso 3.1		
-				}//END SWITCH 21
-
-				//Codigo eliminado----
+				list->current=selectNode(list);//Se le pide al usuario que seleccione un nodo actual de la lista
+				if(list->current!=NULL){//Se ejecuta solo si el nodo seleccionado es diferente de NULL
+					//Submenú
+					printf("Insertar nodo:\n1.Antes del nodo seleccionado\n2.Después del nodo seleccionado\n3.Salir\n");
+							scanf("%i",&opt2);
+					switch(opt2){
+						case 1://caso 3.1: antes del nodo
+							if(list->current==list->head){//Si el nodo seleccionado es el primero,entonces 
+							//en realidad se insertará el nuevo nodo al inicio de la lista, como en el caso 1
+								list->head->prev = node;
+								node->prev = NULL;
+								node->next = list->head;
+								list->head = node;
+							}//---END OF IF
+							else{
+							node->prev = list->current->prev;
+							node->next = list->current;
+							list->current->prev->next = node;
+							list->current->prev = node;
+							}//END OF ELSE
+							printf("El nodo ha sido insertado con éxito :D\n");
+							break;
+						case 2://Caso 3.2: después del nodo
+							if(list->current==list->tail){//Si el nodo seleccionado es el último,entonces 
+							//en realidad se insertará el nuevo nodo al final de la lista, como en el caso 2
+								list->head->prev = node;
+								node->prev = NULL;
+								node->next = list->head;
+								list->head = node;
+							}//---END OF IF
+							else{
+								node->prev = list->current;
+								node->next = list->current->next;
+								list->current->next->prev = node;
+								list->current->next = node;			
+							}
+							printf("El nodo ha sido insertado con éxito :D\n");
+							break;
+						default://Caso 3.1: Salir del menú actual
+							break;//final caso 3.1		
+					}//END SWITCH 21
+				}//END IF
 				break;//final caso 3
 			default: 
 				printf("Opción inválida\n");
@@ -302,7 +297,6 @@ void insertNode(t_list *list){
 }//END OF ELSE
 
 }//------END OF FUNCTION------
-	
 //----------------------------------------------------
 
 //Función para eliminar un nodo de la lista
@@ -384,12 +378,9 @@ void deleteList(t_list *list){
 				list->head->next=NULL;
 				list->current->prev=NULL;
 				free(list->head);
-//i				printf("ALL GOOD AS FAR\n");
 				list->head=list->current;
 				list->current=list->head->next;
-//					printf("ALL GOOD AS FAR\n");
 			}//END OF WHILE
-//		printf("Saliendo del while\n");
 		}//END OF IF 2
 	free(list->head);
 	//Se apuntan a NULL todos los punteros de control de la lista
