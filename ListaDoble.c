@@ -94,9 +94,9 @@ bis:
 				}else{break;}
 			//END OF IF
 
-	} while(opt!=5 && opt2!=2);//Mientras la opción seleccionada por el usuario no sea 5, seguira entrando al menú
+	} while(opt!=5 && opt2!=2);//Mientras opt1 no sea 5 ni opt2 sea 2, seguirá entrando al menú
 	//END OF DO WHILE
-if(list->head!=NULL){
+if(list->head!=NULL){ //Si se salió de la programa sin eliminar la lista, se elimina en este paso
 deleteList(list);
 		}
 free(list);
@@ -134,7 +134,7 @@ t_list *createList(){
 //Función para obtener el tamaño de la lista
 int listSize(t_list *list){
         int i=0;
-        if(list->head!=NULL){
+        if(list->head!=NULL){ //Se recorre la lista de principio a fin con un contador i que devolverá la cantidad de loops 
                 list->current=list->head;
                 while(list->current!=NULL){
                         list->current=list->current->next;
@@ -339,12 +339,13 @@ void deleteNode(t_list *list){
 							r=1;
 						}
 						else{
-							list->current->prev->next=list->current->next; //Coloca el puntero current en el primer nodo de la lista
-							list->current->next->prev=list->current->prev; //Cambia el puntero head al nodo siguiente (ahora este pasa a ser el primer nodo de la lista)
-							list->current->prev=NULL; //Hace que el puntero prev del nuevo head apunte a NULL
-							list->current->next=NULL; //Hace que el puntero prev del antiguo head apunte a NULL
-							free(list->current); //Se libera la memoria del head antiguo
-							list->current=NULL;
+							//Primero se interconectan los nodos anterior y siguiente al nodo actual
+							list->current->prev->next=list->current->next; 
+							list->current->next->prev=list->current->prev; 
+							list->current->prev=NULL; //Se apunta a NULL el puntero previo al nodo actual
+							list->current->next=NULL; //Se apunta a NULL el puntero siguiente al nodo actual
+							free(list->current); //Se libera la memoria del nodo actual 
+							list->current=NULL; //Se apunta a NULL
 							printf("El nodo ha sido eliminado con éxito :D\n");
 						}
 						break;
@@ -375,7 +376,7 @@ void deleteList(t_list *list){
 		list->current=list->head;//Posiciona el puntero current en el head de la lista
 		if(list->head->next!=NULL){//Solo se ejecutará si la lista tiene más de un elemento
 			list->current=list->head->next;
-			while(list->current!=NULL){
+			while(list->current!=NULL){//Este bucle se repetirá mientras current sea diferente de NULL
 				list->head->next=NULL;
 				list->current->prev=NULL;
 				free(list->head);
@@ -383,7 +384,7 @@ void deleteList(t_list *list){
 				list->current=list->head->next;
 			}//END OF WHILE
 		}//END OF IF 2
-	free(list->head);
+	free(list->head); //Se libera el head, que será el último elemento restante de la lista
 	//Se apuntan a NULL todos los punteros de control de la lista
 	list->head=NULL;
 	list->current=NULL;
